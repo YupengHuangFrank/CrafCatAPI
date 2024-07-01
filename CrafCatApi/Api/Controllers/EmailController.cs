@@ -1,4 +1,5 @@
-﻿using CrafCatAPI.Infrastructure.Services;
+﻿using CrafCatApi.Api.Models;
+using CrafCatAPI.Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CrafCatAPI.Api.Controllers
@@ -15,9 +16,9 @@ namespace CrafCatAPI.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SendEmailAsync(string receiverEmail, string subject, [FromBody]string emailContent)
+        public async Task<IActionResult> SendEmailAsync([FromBody]EmailApi email)
         {
-            var response = await _emailHttpService.SendEmailAsync(receiverEmail, subject, emailContent);
+            var response = await _emailHttpService.SendEmailAsync(email.ReceiverEmail, email.Subject, email.EmailContent);
 
             return Ok(response);
         }
