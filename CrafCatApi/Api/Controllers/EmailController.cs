@@ -15,7 +15,7 @@ namespace CrafCatAPI.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SendEmailAsync(string receiverEmail, string subject, string emailContent)
+        public async Task<IActionResult> SendEmailAsync(string receiverEmail, string subject, [FromBody]string emailContent)
         {
             var response = await _emailHttpService.SendEmailAsync(receiverEmail, subject, emailContent);
 
